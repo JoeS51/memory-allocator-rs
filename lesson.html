@@ -372,16 +372,16 @@
         <div class="flight-card">
           <div><strong>Time</strong>90-150 minutes</div>
           <div><strong>Tools</strong>Editor, terminal, Rust</div>
-          <div><strong>Finish line</strong>4 passing tests</div>
+          <div><strong>Finish line</strong>9 passing tests</div>
         </div>
 
         <h3>How to use this lesson</h3>
         <ol>
           <li>Read one chapter, then close the browser or scroll away.</li>
-          <li>Implement the checkpoint in <code>src/main.rs</code> from memory.</li>
+          <li>Implement the checkpoint in <code>src/lib.rs</code> from memory.</li>
           <li>Use the first hint only after ten focused minutes.</li>
           <li>Use the solution only after you can explain what is blocking you.</li>
-          <li>Run <code>cargo test -p memory-allocator</code> after each checkpoint.</li>
+          <li>Run <code>cargo test checkpoint_N</code> after each checkpoint, replacing <code>N</code> with its number.</li>
         </ol>
 
         <div class="warning">
@@ -439,7 +439,7 @@ bytes at/after next: available</code></pre>
         <span class="chapter-number">02</span>
         <p class="eyebrow">Safe arithmetic first</p>
         <h2>Prove the cursor logic</h2>
-        <p>Before pointers, model allocation with numbers. Add this tiny type to <code>src/main.rs</code>. It is intentionally not the final allocator.</p>
+        <p>Before pointers, model allocation with numbers. Implement this tiny type in <code>src/lib.rs</code>. It is intentionally not the final allocator.</p>
 
         <pre><code>use std::ops::Range;
 
@@ -625,7 +625,7 @@ struct Bump&lt;'a&gt; {
         <div class="exercise">
           <h3>Checkpoint: implement allocation</h3>
           <p>For this project, reject layouts with size zero. Real allocator interfaces define special rules for zero-sized types; explicitly excluding them keeps this first contract small.</p>
-          <p>Every addition and subtraction derived from addresses should be checked. Do not update <code>next</code until every check has passed.</p>
+          <p>Every addition and subtraction derived from addresses should be checked. Do not update <code>next</code> until every check has passed.</p>
 
           <details><summary>Hint 1: derive the numbers</summary><div><pre><code>let base = self.start.as_ptr() as usize;
 let current = base.checked_add(self.next)?;
@@ -789,7 +789,7 @@ mod tests {
 }</code></pre></div></details>
 
           <p>Run:</p>
-          <pre><code>cargo test -p memory-allocator</code></pre>
+          <pre><code>cargo test checkpoint_4</code></pre>
           <label class="check"><input type="checkbox" data-checkpoint> All four allocator tests pass.</label>
         </div>
 
